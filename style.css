@@ -1,0 +1,389 @@
+/* 🧼 تنسيق أساسي */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #ffffff;
+    color: #333;
+}
+
+/* 🧭 Navigation Bar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 15px 50px;
+    color: white;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #ffcc00;
+}
+
+/* 🏠 Home page */
+.home-page {
+    background-color: white;
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+}
+
+/* 🖼️ الصورة فقط بدون موجة */
+.profile-img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 30px 10px rgba(255, 215, 0, 0.8);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 50px 20px rgba(255, 215, 0, 1);
+}
+
+/* 📝 النص بجانب الصورة */
+.text-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.main-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #222;
+}
+
+.highlight {
+    color: #FFD700;
+}
+
+.text-box p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.cta-btn {
+    background: #FFD700;
+    color: #222;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.cta-btn:hover {
+    background: #ffc400;
+    transform: translateY(-2px);
+}
+
+/* 📝 ABOUT PAGE */
+.page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    padding: 50px 20px;
+    gap: 50px;
+    font-family: "Cairo", sans-serif;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+/* 🖼️ صورة البروفايل */
+.profile-box img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #FFD700;
+    box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.7);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-box img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px 12px rgba(255, 215, 0, 0.9);
+}
+
+/* ✍️ النص بجانب الصورة */
+.about-text-box {
+    max-width: 600px;
+}
+
+.about-text-box h2 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.about-text-box p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* 📬 Contact / Social Info */
+.about-contact {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.about-card {
+    background: #f9f9f9;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 220px;
+    text-decoration: none;
+    color: #333;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.about-card i,
+.about-card img {
+    font-size: 26px;
+    width: 30px;
+    height: 30px;
+}
+
+.about-card.phone i { color: #28a745; }
+.about-card.gmail i { color: #EA4335; }
+.about-card.facebook img { width: 30px; height: 30px; }
+
+.about-text {
+    font-size: 16px;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+/* 📬 صفحة الاتصال */
+.contact-page {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.contact-page h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #FFD700;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    background: #f9f9f9;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 260px;
+    text-decoration: none;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card i,
+.contact-card img {
+    font-size: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+.contact-card.phone i { color: #28a745; }
+.contact-card.gmail i { color: #EA4335; }
+.contact-card.facebook img { width: 35px; height: 35px; }
+
+.contact-text {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+/* 🌟 Projects Section */
+.projects-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+
+.projects-section h2 {
+  color: #FFD700; /* العنوان بالأصفر */
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.projects-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-card h3 {
+  font-size: 1.3rem;
+  margin: 15px 0;
+  color: #333;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: #FFD700;
+  color: #000;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #e6c200;
+}
+
+
+
+.tp-3d-container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.tp-3d-container h3 {
+  color: #FFD700;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.skills-section {
+  max-width: 700px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.skills-section h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.skill {
+  text-align: left;
+}
+
+.skill span {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.progress {
+  height: 100%;
+  text-align: right;
+  padding-right: 10px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #4e9af1, #0066ff);
+  transition: width 1s ease-in-out;
+}

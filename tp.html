@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes TPs - Samah</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">✨ Samah</div>
+    <nav>
+      <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="tp.html" class="active">TP</a></li>
+         <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+    <section class="page-content">
+        <h2>Mes TPs</h2>
+      <div class="tp-3d-container">
+        <h3>🪑 Table et Chaises 3D</h3>
+        <model-viewer 
+          src="Table.glb"
+          alt="Table et chaises 3D"
+          auto-rotate 
+          camera-controls 
+          shadow-intensity="1"
+          style="width: 100%; height: 500px;">
+        </model-viewer>
+      </div>
+
+    </section>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+</body>
+</html>
