@@ -329,16 +329,91 @@ nav ul li a.active {
 
 
 
+/* 🎨 قسم خاص بصفحة TP (عرض نماذج Blender) */
+.page-content h2 {
+  color: #FFD700; /* العنوان بالأصفر */
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
 .tp-3d-container {
   margin-top: 40px;
+  background: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 30px;
+  width: 90%;
+  max-width: 900px;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tp-3d-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .tp-3d-container h3 {
   color: #FFD700;
   margin-bottom: 15px;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
+
+/* عرض الموديل ثلاثي الأبعاد */
+model-viewer {
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* زر تحميل ملف Blender */
+.download-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #FFD700;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+.download-btn:hover {
+  background: #e6c200;
+  transform: translateY(-3px);
+}
+
+/* ===== صفحة TP - فيديو المزهرية ===== */
+
+/* العنوان الخاص بالفيديو */
+.tp-video-title {
+    color: #FFD700;  /* أصفر */
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* زر تحميل المشهد Blender للفيديو */
+.tp-download-btn {
+    background: #FFD700; /* أصفر */
+    color: #000;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+.tp-download-btn:hover {
+    background: #e6c200;
+    transform: translateY(-3px);
+}
+
 
 .skills-section {
   max-width: 700px;
@@ -387,3 +462,101 @@ nav ul li a.active {
   background: linear-gradient(90deg, #4e9af1, #0066ff);
   transition: width 1s ease-in-out;
 }
+
+button {
+  background-color: #e6c200; 
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* ===== Responsive Design ===== */
+
+/* Mobile < 768px */
+@media (max-width: 768px) {
+    /* Header */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Page Content */
+    .page-content {
+        padding: 20px 15px;
+    }
+
+    /* TP Page */
+    .tp-3d-container h3,
+    .tp-video-title {
+        font-size: 1.4rem;
+    }
+
+    .download-btn, .tp-download-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    /* Projects Section */
+    .projects-section h2,
+    .projects-container,
+    .project-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Profile Images */
+    .profile-img, .profile-box img {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* Text Boxes */
+    .text-box, .about-text-box {
+        max-width: 100%;
+    }
+}
+
+/* Tablet 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .page-content {
+        padding: 25px 30px;
+    }
+
+    .tp-3d-container h3,
+    .tp-video-title {
+        font-size: 1.6rem;
+    }
+
+    .download-btn, .tp-download-btn {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+    }
+
+    .profile-img, .profile-box img {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/* صور وفيديوهات مرنة */
+.tp-3d-container img,
+.tp-3d-container video {
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+    display: block;
+    margin-bottom: 15px;
+}
+
