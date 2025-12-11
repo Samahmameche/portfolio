@@ -60,7 +60,7 @@ Votre navigateur ne supporte pas la lecture de vidéo.
 <h2>TP4: 🌐 Interactive 3D Scene (Vase & Balls)</h2>
 <canvas id="webgl"></canvas>
 <br>
-<a href="Vase_and_Bricks.glb" download="Vase_and_Bricks.glb" class="download-btn">📂 Download GLB</a>
+<a href="Vase and Bricks.glb" download="Vase and Bricks.glb" class="download-btn">📂 Download GLB</a>
 </section>
 
 <script>
@@ -103,7 +103,7 @@ world.addBody(groundBody);
 
 // Load Vase GLB and setup physics
 const loader = new THREE.GLTFLoader();
-loader.load('Vase_and_Bricks.glb', gltf=>{
+loader.load('Vase and Bricks.glb', gltf=>{
     const model = gltf.scene;
     scene.add(model);
 
@@ -166,3 +166,4 @@ window.addEventListener('resize',()=>{
 </script>
 </body>
 </html>
+
