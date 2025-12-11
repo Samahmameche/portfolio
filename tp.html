@@ -92,9 +92,13 @@ scene.add(dirLight);
 
 // Load GLB (تأكد من اسم الملف path صحيح)
 const loader = new THREE.GLTFLoader();
-loader.load('https://modelviewer.dev/shared-assets/models/Astronaut.glb', gltf => {
-    scene.add(gltf.scene);
-});
+loader.load(
+  'Vase_and_Bricks.glb?v=2', // ?v=2 لتفادي مشكلة الكاش
+  function(gltf){
+    const model = gltf.scene;
+    model.scale.set(1,1,1);
+    scene.add(model);
+  },
 
   undefined,
   function(error){
