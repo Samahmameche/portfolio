@@ -57,13 +57,13 @@
     <button>Voir le rapport Blender 3D</button>
   </a>
 
-  <!-- ⭐ TP 3 Interactive Scene avec Physics -->
+  <!-- TP 3 Interactive Scene avec Physics -->
   <h2>TP4: 🌐 Interactive 3D Scene (Vase & Balls)</h2>
 
   <canvas id="webgl" style="width:100%; height:600px; display:block; margin:auto;"></canvas>
 
   <br>
-  <a href="scene.glb" download="Vase and Bricks.glb" class="download-btn">
+  <a href="Vase and Bricks.glb" download="Vase and Bricks.glb" class="download-btn">
     📂 Download GLB
   </a>
 
@@ -140,9 +140,11 @@
 
     // balls physics
     const pairs = [];
+    const initialPositions = [];
     balls.forEach(mesh=>{
       const worldPos = new THREE.Vector3();
       mesh.getWorldPosition(worldPos);
+      initialPositions.push(worldPos.clone()); // حفظ المواقع الأصلية
       mesh.geometry.computeBoundingSphere();
       const radius = mesh.geometry.boundingSphere.radius * mesh.scale.x;
       const shape = new CANNON.Sphere(radius);
@@ -155,7 +157,7 @@
     });
 
     // UI
-    createUI(pairs, world);
+    createUI(pairs, world, initialPositions);
 
     // animation loop
     const fixedStep = 1/60;
@@ -187,7 +189,7 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  function createUI(pairs,world){
+  function createUI(pairs,world,initialPositions){
     const container = document.createElement('div');
     container.style.position='fixed';
     container.style.right='20px';
@@ -200,9 +202,10 @@
 
     const restartBtn = document.createElement('button');
     restartBtn.textContent='Restart Simulation';
-    restartBtn.onclick=()=>{
-      pairs.forEach(p=>{
-        p.body.position.set(p.mesh.position.x,p.mesh.position.y+1,p.mesh.position.z);
+    restartBtn.onclick = () => {
+      pairs.forEach((p,i)=>{
+        const pos = initialPositions[i];
+        p.body.position.set(pos.x,pos.y,pos.z);
         p.body.velocity.set(0,0,0);
         p.body.angularVelocity.set(0,0,0);
       });
