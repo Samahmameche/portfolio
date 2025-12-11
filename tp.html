@@ -144,11 +144,12 @@
     balls.forEach(mesh=>{
       const worldPos = new THREE.Vector3();
       mesh.getWorldPosition(worldPos);
-      initialPositions.push(worldPos.clone()); // حفظ المواقع الأصلية
+      worldPos.y += 1; // ضع الكريات فوق المزهرية لتسقط
+      initialPositions.push(worldPos.clone());
       mesh.geometry.computeBoundingSphere();
       const radius = mesh.geometry.boundingSphere.radius * mesh.scale.x;
       const shape = new CANNON.Sphere(radius);
-      const body = new CANNON.Body({ mass:0.2 });
+      const body = new CANNON.Body({ mass:0.2 }); // mass>0 لتتحرك
       body.addShape(shape);
       body.position.set(worldPos.x, worldPos.y, worldPos.z);
       world.addBody(body);
@@ -161,15 +162,9 @@
 
     // animation loop
     const fixedStep = 1/60;
-    let lastTime;
     function animate(){
       requestAnimationFrame(animate);
-      const time = performance.now()/1000;
-      if(lastTime!==undefined){
-        const dt = time-lastTime;
-        world.step(fixedStep, dt,3);
-      }
-      lastTime=time;
+      world.step(fixedStep);
 
       pairs.forEach(p=>{
         p.mesh.position.copy(p.body.position);
