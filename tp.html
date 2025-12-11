@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mes TPs - Samah</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes TPs - Samah</title>
+  <link rel="stylesheet" href="style.css">
 
-<!-- Three.js + GLTFLoader + OrbitControls -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+  <!-- Three.js + GLTFLoader + OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 
-<!-- CANNON.js -->
-<script src="https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"></script>
-
-<style>
-body { margin:0; font-family:sans-serif; }
-canvas#webgl { display:block; width:100%; height:600px; margin:auto; background:#eee; }
-.download-btn { display:inline-block; margin:10px 0; padding:5px 10px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px; }
-</style>
+  <style>
+    body { margin: 0; }
+    canvas#webgl { display: block; width: 100%; height: 600px; margin: auto; background: #eee; }
+    .download-btn { display:inline-block; margin:10px 0; padding:5px 10px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px; }
+  </style>
 </head>
 
 <body>
 <header>
-<div class="logo">✨ Samah</div>
-<nav>
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Me</a></li>
-<li><a href="tp.html" class="active">TP</a></li>
-<li><a href="skills.html">Skills</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
+  <div class="logo">✨ Samah</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="tp.html" class="active">TP</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
 <section class="page-content">
@@ -49,22 +46,22 @@ canvas#webgl { display:block; width:100%; height:600px; margin:auto; background:
 <!-- TP3 -->
 <h2 class="tp-video-title">Tp3: Simulation - Vase and Bricks</h2>
 <video width="800" height="450" controls>
-<source src="vase_simulation.mp4" type="video/mp4">
-Votre navigateur ne supporte pas la lecture de vidéo.
+  <source src="vase_simulation.mp4" type="video/mp4">
+  Votre navigateur ne supporte pas la lecture de vidéo.
 </video>
 <br>
 <a href="Vase and Bricks.blend" download="Vase.blend" class="download-btn">📂 Download & Open in Blender</a>
 <a href="rapport.pdf" target="_blank"><button>Voir le rapport Blender 3D</button></a>
 
-<!-- TP4 -->
+<!-- TP4: 3D Scene Viewer -->
 <h2>TP4: 🌐 Interactive 3D Scene (Vase & Balls)</h2>
 <canvas id="webgl"></canvas>
 <br>
-<a href="Vase and Bricks.glb" download="Vase and Bricks.glb" class="download-btn">📂 Download GLB</a>
+<a href="Vase_and_Bricks.glb" download="Vase_and_Bricks.glb" class="download-btn">📂 Download GLB</a>
 </section>
 
 <script>
-// Renderer & Canvas
+// Renderer
 const canvas = document.getElementById("webgl");
 const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
 renderer.setSize(window.innerWidth, 600);
@@ -90,80 +87,33 @@ const dirLight = new THREE.DirectionalLight(0xffffff,1);
 dirLight.position.set(5,10,7);
 scene.add(dirLight);
 
-// Physics world
-const world = new CANNON.World();
-world.gravity.set(0,-9.82,0);
-world.broadphase = new CANNON.SAPBroadphase(world);
-world.solver.iterations = 10;
-
-// Ground plane
-const groundBody = new CANNON.Body({ mass:0, shape: new CANNON.Plane() });
-groundBody.quaternion.setFromEuler(-Math.PI/2,0,0);
-world.addBody(groundBody);
-
-// Load Vase GLB and setup physics
+// Load Vase GLB (no physics)
 const loader = new THREE.GLTFLoader();
-loader.load('Vase and Bricks.glb', gltf=>{
+loader.load('Vase_and_Bricks.glb', gltf=>{
     const model = gltf.scene;
+    model.scale.set(1,1,1);
     scene.add(model);
-
-    // Static vase body
-    let vaseMesh = null;
-    model.traverse(child=>{
-        if(child.isMesh && child.name.toLowerCase().includes('vase')) vaseMesh = child;
-    });
-
-    if(vaseMesh){
-        const bbox = new THREE.Box3().setFromObject(vaseMesh);
-        const size = new THREE.Vector3();
-        bbox.getSize(size);
-        const boxShape = new CANNON.Box(new CANNON.Vec3(size.x/2, size.y/2, size.z/2));
-        const vaseBody = new CANNON.Body({ mass:0 });
-        vaseBody.addShape(boxShape);
-        vaseBody.position.set((bbox.min.x+bbox.max.x)/2, (bbox.min.y+bbox.max.y)/2, (bbox.min.z+bbox.max.z)/2);
-        world.addBody(vaseBody);
-    }
-
-    // Balls
-    const balls = [];
-    for(let i=0;i<5;i++){
-        const radius = 0.1;
-        const sphereGeo = new THREE.SphereGeometry(radius,32,32);
-        const sphereMat = new THREE.MeshStandardMaterial({color:0xff0000});
-        const sphereMesh = new THREE.Mesh(sphereGeo,sphereMat);
-        sphereMesh.position.set(0,1 + i*0.25,0);
-        scene.add(sphereMesh);
-
-        const sphereShape = new CANNON.Sphere(radius);
-        const sphereBody = new CANNON.Body({ mass:0.2 });
-        sphereBody.addShape(sphereShape);
-        sphereBody.position.set(0,1 + i*0.25,0);
-        world.addBody(sphereBody);
-
-        balls.push({mesh:sphereMesh, body:sphereBody});
-    }
-
-    // Animate loop
-    function animate(){
-        requestAnimationFrame(animate);
-        world.step(1/60);
-        balls.forEach(b=>{
-            b.mesh.position.copy(b.body.position);
-            b.mesh.quaternion.copy(b.body.quaternion);
-        });
-        controls.update();
-        renderer.render(scene,camera);
-    }
-    animate();
+},
+undefined,
+error=>{
+    console.error('Error loading GLB:', error);
 });
+
+// Animate
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene,camera);
+}
+animate();
 
 // Resize
 window.addEventListener('resize',()=>{
-    camera.aspect = window.innerWidth/600;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth,600);
+  camera.aspect = window.innerWidth/600;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,600);
 });
 </script>
+
 </body>
 </html>
-
