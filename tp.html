@@ -6,10 +6,8 @@
   <title>Mes TPs - Samah</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- مكتبة العرض 3D -->
+  <!-- مكتبة Model Viewer لعرض 3D -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-
 
 </head>
 
@@ -32,39 +30,56 @@
   <section class="page-content">
     <h2>My TPs</h2>
 
+    <!-- TP 1 Table + Chairs -->
     <div class="tp-3d-container">
-      <h3>Tp2:🪑 3D Table and Chairs</h3>
+      <h3>Tp2: 🪑 3D Table and Chairs</h3>
 
-      <!-- عرض النموذج ثلاثي الأبعاد -->
- <img src="table_chairs.png" alt="Table et chaises" width="800" height="600">
+      <img src="table_chairs.png" alt="Table et chaises" width="800" height="600">
 
-      <!-- زر تحميل وفتح الملف في Blender -->
       <a href="table_chairs.blend" download="Table.blend" class="download-btn">
         📂 Download & Open in Blender
       </a>
     </div>
 
-     
-  <!-- فيديو المزهرية -->
- <h2 class="tp-video-title">Tp3:Simulation - Vase and Bricks</h2>
 
-<video width="800" height="450" controls>
-    <source src="vase_simulation.mp4" type="video/mp4">
-    Votre navigateur ne supporte pas la lecture de vidéo.
-</video>
-<br><br>
+    <!-- TP 2 Vase Simulation (Video + .blend) -->
+    <h2 class="tp-video-title">Tp3: Simulation - Vase and Bricks</h2>
 
-    <a href="Vase and Bricks.blend" download="Table.blend" class="download-btn">
-        📂 Download & Open in Blender
+    <video width="800" height="450" controls>
+      <source src="vase_simulation.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+    <br><br>
+
+    <a href="Vase and Bricks.blend" download="Vase.blend" class="download-btn">
+      📂 Download & Open in Blender
     </a>
 
     <a href="rapport.pdf" target="_blank">
       <button>Voir le rapport Blender 3D</button>
     </a>
 
+
+
+    <!-- ⭐ TP 3 Interactive Scene (GLB) -->
+    <h2>TP4: 🌐 Interactive 3D Scene (Vase & Balls)</h2>
+
+    <model-viewer 
+      src="scene.glb"
+      alt="Interactive Vase Simulation"
+      auto-rotate
+      camera-controls
+      interaction-prompt="when-focused"
+      style="width: 100%; max-width: 900px; height: 600px; margin: auto; border-radius: 12px; background: #eee;">
+    </model-viewer>
+
+    <br>
+
+    <a href="scene.glb" download="scene.glb" class="download-btn">
+      📂 Download GLB
+    </a>
+
   </section>
 
 </body>
 </html>
-
-
