@@ -108,78 +108,84 @@
   world.addBody(groundBody);
 
   // Load GLB
+ 
+
   const loader = new THREE.GLTFLoader();
-  loader.load('Vase_and_Bricks.glb', gltf => {
+
+// نضيف ?v=2 باش browser يجيب النسخة الجديدة ويتهنى من الكاش
+loader.load('Vase_and_Bricks.glb?v=2', gltf => {
     const model = gltf.scene;
     scene.add(model);
 
+    // باقي الكود ديالك كما هو
     const balls = [];
     let vaseMesh = null;
 
     model.traverse(child => {
-      if(child.isMesh){
-        child.castShadow = true;
-        child.receiveShadow = true;
-        const name = (child.name||'').toLowerCase();
-        if(name.includes('ball') || name.includes('sphere')) balls.push(child);
-        else if(name.includes('vase') || name.includes('container')) vaseMesh = child;
-      }
+        if(child.isMesh){
+            child.castShadow = true;
+            child.receiveShadow = true;
+            const name = (child.name||'').toLowerCase();
+            if(name.includes('ball') || name.includes('sphere')) balls.push(child);
+            else if(name.includes('vase') || name.includes('container')) vaseMesh = child;
+        }
     });
 
     // vase static body
     if(vaseMesh){
-      const bbox = new THREE.Box3().setFromObject(vaseMesh);
-      const size = new THREE.Vector3();
-      bbox.getSize(size);
-      const boxShape = new CANNON.Box(new CANNON.Vec3(size.x/2, size.y/2, size.z/2));
-      const body = new CANNON.Body({ mass:0 });
-      body.addShape(boxShape);
-      body.position.set((bbox.min.x+bbox.max.x)/2, (bbox.min.y+bbox.max.y)/2, (bbox.min.z+bbox.max.z)/2);
-      world.addBody(body);
+        const bbox = new THREE.Box3().setFromObject(vaseMesh);
+        const size = new THREE.Vector3();
+        bbox.getSize(size);
+        const boxShape = new CANNON.Box(new CANNON.Vec3(size.x/2, size.y/2, size.z/2));
+        const body = new CANNON.Body({ mass:0 });
+        body.addShape(boxShape);
+        body.position.set((bbox.min.x+bbox.max.x)/2, (bbox.min.y+bbox.max.y)/2, (bbox.min.z+bbox.max.z)/2);
+        world.addBody(body);
     }
 
     // balls physics
     const pairs = [];
     balls.forEach(mesh=>{
-      const worldPos = new THREE.Vector3();
-      mesh.getWorldPosition(worldPos);
-      mesh.geometry.computeBoundingSphere();
-      const radius = mesh.geometry.boundingSphere.radius * mesh.scale.x;
-      const shape = new CANNON.Sphere(radius);
-      const body = new CANNON.Body({ mass:0.2 });
-      body.addShape(shape);
-      body.position.set(worldPos.x, worldPos.y, worldPos.z);
-      world.addBody(body);
-      scene.attach(mesh);
-      pairs.push({mesh,body});
+        const worldPos = new THREE.Vector3();
+        mesh.getWorldPosition(worldPos);
+        mesh.geometry.computeBoundingSphere();
+        const radius = mesh.geometry.boundingSphere.radius * mesh.scale.x;
+        const shape = new CANNON.Sphere(radius);
+        const body = new CANNON.Body({ mass:0.2 });
+        body.addShape(shape);
+        body.position.set(worldPos.x, worldPos.y, worldPos.z);
+        world.addBody(body);
+        scene.attach(mesh);
+        pairs.push({mesh,body});
     });
 
-    // UI
     createUI(pairs, world);
 
     // animation loop
     const fixedStep = 1/60;
     let lastTime;
     function animate(){
-      requestAnimationFrame(animate);
-      const time = performance.now()/1000;
-      if(lastTime!==undefined){
-        const dt = time-lastTime;
-        world.step(fixedStep, dt,3);
-      }
-      lastTime=time;
+        requestAnimationFrame(animate);
+        const time = performance.now()/1000;
+        if(lastTime!==undefined){
+            const dt = time-lastTime;
+            world.step(fixedStep, dt,3);
+        }
+        lastTime=time;
 
-      pairs.forEach(p=>{
-        p.mesh.position.copy(p.body.position);
-        p.mesh.quaternion.copy(p.body.quaternion);
-      });
+        pairs.forEach(p=>{
+            p.mesh.position.copy(p.body.position);
+            p.mesh.quaternion.copy(p.body.quaternion);
+        });
 
-      controls.update();
-      renderer.render(scene, camera);
+        controls.update();
+        renderer.render(scene, camera);
     }
     animate();
 
-  });
+});
+
+   
 
   window.addEventListener('resize',()=>{
     camera.aspect = window.innerWidth/window.innerHeight;
@@ -235,6 +241,7 @@
 
 </body>
 </html>
+
 
 
 
